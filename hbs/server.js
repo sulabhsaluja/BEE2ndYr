@@ -7,6 +7,8 @@ const userRoute = require("./routes/userRoutes");
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.set("view engine", "hbs");
+var hbs = require('hbs');
+hbs.registerPartials(__dirname + '/views/partials', function (err) {});
 //Create a route to render Home Page....
 app.get("/", (req, res) => {
   res.render("home", {
