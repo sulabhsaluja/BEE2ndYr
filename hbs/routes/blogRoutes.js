@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const blog = require("../model/blog");
 
+
+
 router.post("/", async (req, res) => {
   let { title, content, author } = req.body;
   let newBlog = new blog({
@@ -10,12 +12,11 @@ router.post("/", async (req, res) => {
     author: author,
   });
   await newBlog.save();
-  res.send("Blog added Successfully!");
+  res.redirect("/")
 });
 
 router.get("/", async (req, res) => {
   let allblogs = await blog.find();
-  // res.send(allblogs);
   res.render("blog",{
     blogs:allblogs,
   })
@@ -29,7 +30,6 @@ router.get("/:id", async (req, res) => {
     content:oneblog.content,
     author:oneblog.author
   })
-  // res.send(oneblog);
 });
 
 router.delete("/:id", async (req, res) => {

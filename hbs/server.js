@@ -5,6 +5,7 @@ const Blog = require("./model/blog");
 const blogRoute = require("./routes/blogRoutes");
 const userRoute = require("./routes/userRoutes");
 app.use(express.json());
+app.use(express.urlencoded({extended:true}))
 app.set("view engine", "hbs");
 //Create a route to render Home Page....
 app.get("/", (req, res) => {
@@ -14,6 +15,11 @@ app.get("/", (req, res) => {
     followers: ["Sulabh", "Yudhi", "Tanish", "Yatish"],
   });
 });
+
+
+app.get("/addblog",(req,res)=>{
+  res.render("addBlog")
+})
 
 app.use("/blogs", blogRoute);
 app.use("/users", userRoute);
